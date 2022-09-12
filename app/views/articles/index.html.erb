@@ -12,7 +12,7 @@
     <tr>
       <td><%= article.title %></td>
       <td><%= article.text %></td>
-      <td><%= link_to 'Show', article_path(id: article.id) %></td>
+      <td><%= link_to 'Show', article_path(article) %></td>
       <td><%= link_to 'DESTROYGFG', edit_article_path(article) %></td>
       <td><%= link_to 'Destroy', article_path(article),
               method: :delete,
