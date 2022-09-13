@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 
-    def index
+    def index 
         @article = Article.all
     end
 
@@ -32,7 +32,8 @@ class ArticlesController < ApplicationController
     def create
         if current_user.role!="customer"
             @article=Article.new(article_params)
-        
+            @article.avatar.attach(article_params[:avatar])
+            @article.user_id=current_user.id
             if @article.save
                 redirect_to @article
             else
@@ -61,7 +62,8 @@ class ArticlesController < ApplicationController
     private
 
     def article_params
-        params.require(:article).permit(:title,:text)
+        #params.require(:article).permit(:title,:text)
+        params.require(:article).permit(:title, :text, :avatar,:user_id)
     end
 
 
