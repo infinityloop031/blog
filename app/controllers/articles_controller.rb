@@ -1,7 +1,11 @@
 class ArticlesController < ApplicationController
 
     def index 
-        @article = Article.all
+        if current_user.role=="admin"
+            @article=Article.where(user_id:current_user)
+        else
+            @article=Article.all
+        end
     end
 
     def new
