@@ -19,9 +19,9 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
+# Use Active Model 
 gem 'bcrypt', '~> 3.1.7'
-
+gem 'jquery-rails'
 gem 'devise'
 
 # Use Active Storage variant
