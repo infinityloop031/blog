@@ -16,6 +16,14 @@
   <% end %>
  
   <%= form.file_field :avatar %>
+  <%# Category.pluck(:name) %>
+ 
+  <%# <%=form.select :name ,Category.pluck(:name)%> %>
+  <%# <%= form.select :category_id, options_from_collection_for_select(Category.all, :id, :name) %> %>
+  <%# <%debugger%>
+  <%# <%= :name%> %> %>
+  <%=collection_select(:category_id,:id, Category.all, :id, :name, :prompt => true)%>
+
 
   <p>
     <%= form.label :title %><br>

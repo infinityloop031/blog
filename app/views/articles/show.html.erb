@@ -11,6 +11,8 @@
   <strong>Avatar:</strong>
   <%= image_tag @article.avatar%>
 
+  <%=Category.pluck(:name)[ArticleCategory.where(article_id:11).ids[0]-1] %>
+
 <p><%=notice%>
 </p>
  

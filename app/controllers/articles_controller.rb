@@ -35,10 +35,10 @@ class ArticlesController < ApplicationController
 
     def create
         if current_user.role!="customer"
-            @article=Article.new(article_params)
-            @article.avatar.attach(article_params[:avatar])
-            @article.user_id=current_user.id
+            @article=current_user.articles.build(article_params)
             if @article.save
+                @article.article_categories.new(category_id:params[:category_id].require(:id).to_i)
+                @article.save
                 redirect_to @article
             else
                 render 'new'
@@ -67,7 +67,8 @@ class ArticlesController < ApplicationController
 
     def article_params
         #params.require(:article).permit(:title,:text)
-        params.require(:article).permit(:title, :text, :avatar,:user_id)
+        params.require(:article).permit(:title, :text, :user_id, :avatar)
+
     end
 
 
