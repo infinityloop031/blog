@@ -10,21 +10,34 @@
       <ul>
         <% @article.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
-        <% end %>
+        <% end %> 
       </ul>
     </div>
   <% end %>
  
   <%= form.file_field :avatar %>
+  <br>
   <%# Category.pluck(:name) %>
  
-  <%# <%=form.select :name ,Category.pluck(:name)%> %>
-  <%# <%= form.select :category_id, options_from_collection_for_select(Category.all, :id, :name) %> %>
+  <%# <%=form.select :name ,Category.pluck(:name)%>
+  <%# <%= form.select :category_id, options_from_collection_for_select(Category.all, :id, :name),{},{:multiple=> true,:size=> 2} %> 
   <%# <%debugger%>
-  <%# <%= :name%> %> %>
-  <%=collection_select(:category_id,:id, Category.all, :id, :name, :prompt => true)%>
-
-
+  <%# <%= :name%>   
+  <%# <%= form.select :category_id, options_for_select(Category.all.collect { |cat| [cat.name, cat.id]})%> 
+  <%# <%=collection_select(:category_id,:id, Category.all, :id, :name, :prompt => true)%> 
+<%# <%=select_tag :name,options_from_collection_for_select(Category.all,:id,:name), {:multiple=>true}%>
+<%# <%=form.collection_check_boxes :name, Category.all, :id, :name, {:multiple=>true }  %>
+  <%# <%= select_tag :category_id "filter",options_for_select(Category.all.collect {|x| x.name}) %>
+<%# 
+   <%=collection_select(:category_id,:id, Category.all, :id, :name,{}, {:multiple=>true})%> 
+   <%# <%=collection_check_boxes(:id, :name, Category.all, :id, :name)%> 
+   <strong>select Categories</strong>
+   <%= collection_check_boxes(:category, :ids, Category.all, :id, :name) do |b| %>
+    <li>
+      <%= b.check_box %>
+      <%= b.label %>
+    </li>
+<% end %>
   <p>
     <%= form.label :title %><br>
     <%= form.text_field :title %>

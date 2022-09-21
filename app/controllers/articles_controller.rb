@@ -37,7 +37,13 @@ class ArticlesController < ApplicationController
         if current_user.role!="customer"
             @article=current_user.articles.build(article_params)
             if @article.save
-                @article.article_categories.new(category_id:params[:category_id].require(:id).to_i)
+                # @article.article_categories.new(category_id:params[:category_id].require(:id).to_i)
+
+                params[:category][:ids].each do |x|
+                    if x!=""
+                        @article.article_categories.new(category_id:x)
+                    end
+                end  
                 @article.save
                 redirect_to @article
             else
