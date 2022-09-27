@@ -1,18 +1,19 @@
 class ArticlePolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
-    def resolve
-      if user.admin?
-        scope.where(user_id:user.id)
-        
-      else
-        scope.all
-      end
+      def resolve
+        if user.admin?
+          scope.where(user_id:user.id,status:"approved")
+        elsif user.superadmin?
+          scope.where(status:"draft")  
+        else
+          scope.all
+        end
     end
   end
   def index?
     if user.present?
-      if user.admin? || user.customer?
+      if user.admin? || user.customer? || user.superadmin?
         true
       end
     end
@@ -31,13 +32,13 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def edit?
-    if user.admin?
+    if user.admin? || user.superadmin?
       true
     end
   end
 
   def update?
-    if user.admin?
+    if user.admin? || user.superadmin?
       true
     end
   end

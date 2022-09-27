@@ -38,7 +38,18 @@
       <%= b.label %>
     </li>
 <% end %>
+
+<p>
+
+
+<%if current_user.role!="admin" && current_user.role!="customer"%>
+  <strong>Status</strong>
+  </p>
+    <%=select_tag "status",options_for_select(Article.statuses.keys.each {|x| x}) %> 
   <p>
+<%end%>
+
+
     <%= form.label :title %><br>
     <%= form.text_field :title %>
   </p>

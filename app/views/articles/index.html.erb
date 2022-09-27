@@ -1,4 +1,3 @@
-
 <p><%=notice%>
 <h1>Listing Articles</h1>
 <% if current_user.role!="customer"%>
@@ -13,9 +12,11 @@
   <% @article.each do |article| %>
     <tr>
     <% if current_user.role=="customer"%>
-      <td><%= article.title %></td>
-      <td><%= article.text %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
+      <% if article.status=="approved"%>
+        <td><%= article.title %></td>
+        <td><%= article.text %></td>
+        <td><%= link_to 'Show', article_path(article) %></td>
+      <% end %>
     <% else %>
     <td><%= article.title %></td>
     <td><%= article.text %></td>
